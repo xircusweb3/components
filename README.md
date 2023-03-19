@@ -2,7 +2,29 @@
 
 These Chakra UI Components are simplified and uses Xircus SDK
 
-### What can you do?
+## Installation
+```
+yarn add @xircus-web3/components
+npm install @xircus-web3/components
+```
+
+## Usage
+If you're using a **Next** JS app, this is how the **_app.js** will look like
+```
+import { XircusChakraProvider } from "@xircus-web3/components"
+
+function MyApp({ Component, pageProps }) {
+  return (
+    <XircusChakraProvider autoConnect={true}>
+      <Component {...pageProps} />
+    </XircusChakraProvider>
+  )
+}
+
+export default MyApp
+```
+
+### Components
 - Connect Wallet
 - Xircus Registry Authentication with JWT Token and Referral Tracking
 - Data Tables
