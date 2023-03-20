@@ -3,21 +3,18 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   Button,
 } from '@chakra-ui/react'
 import { TbChevronDown } from 'react-icons/tb'
 
-export const Dropdown = ({ children, items = [], btnProps }) => {
+export const Dropdown = ({ action, children, items = [], btnProps }) => {
   return (
     <Menu>
       <MenuButton as={Button} rightIcon={<TbChevronDown />} {...btnProps}>
-        {children}
+        {action}
       </MenuButton>
       <MenuList>
+        {children}
         {
           (items || []).map(item => <MenuItem key={item.key} {...item}>{item.content}</MenuItem>)
         }

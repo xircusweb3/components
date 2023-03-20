@@ -1,11 +1,9 @@
 {
   "name": "@xircus-web3/components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chakra UI Components with Xircus SDK",
   "main": "src/index.js",
-  "author": "Xircus",
-  "license": "MIT",
-  "private": true,
+  "license": "Apache 2.0",
   "dependencies": {
     "@chakra-ui/react": "^2.5.2",
     "@emotion/react": "^11.10.6",

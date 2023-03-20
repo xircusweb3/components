@@ -1,18 +1,17 @@
 import { useState } from 'react'
-import { Box, Avatar, HStack, Text, useClipboard, useToast } from '@chakra-ui/react'
-import { useWallet, useUtils, useWalletAuth, useSDKCore } from '@xircus-web3/react'
-import { TbCheck, TbCopy, TbLogout, TbRefresh } from 'react-icons/tb'
-import { Dropdown } from './Menu'
+import { Avatar, HStack, Text, useClipboard, useToast } from '@chakra-ui/react'
+import { useWallet, useUtils, useNetwork } from '@xircus-web3/react'
+import { TbCheck, TbCopy, TbExternalLink, TbLogout, TbRefresh, TbSend, TbSignature } from 'react-icons/tb'
+import { Dropdown } from './Dropdown'
 
 const ICONS_URL = 'https://raw.githubusercontent.com/xircusweb3/wallet-icons/master/wallets/'
 
-export const ConnectWallet = ({ children, wallets = [], actions = [], chains = [], withAuth = false }) => {
-  const auth = useWalletAuth()
+export const ConnectWallet = ({ children, btnProps }) => {
+  const network = useNetwork()
   const wallet = useWallet()
   const utils = useUtils()
   const toast = useToast()
-  const core = useSDKCore()
-  const { onCopy, hasCopied, setValue, value } = useClipboard(wallet.account || '')
+  const { onCopy, hasCopied, value } = useClipboard(wallet.account || '')
   const [loading, setLoading] = useState(false)
 
   const defWallets = [
@@ -45,8 +44,7 @@ export const ConnectWallet = ({ children, wallets = [], actions = [], chains = [
       content: 'Sender',
       icon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/sender150.png`} />,      
       onClick: wallet.connectSender
-    },            
-    ...wallets
+    }
   ]
 
   const handleCopy = () => {
@@ -84,37 +82,62 @@ export const ConnectWallet = ({ children, wallets = [], actions = [], chains = [
         icon: <TbRefresh />,
         onClick: handleGetBalance
       },      
+      // {
+      //   key: 'transfer',
+      //   content: 'Transfer',
+      //   icon: <TbSend />,
+      //   onClick: handleGetBalance
+      // },
+      // {
+      //   key: 'sign',
+      //   content: 'Sign Message',
+      //   icon: <TbSignature />,
+      //   onClick: handleGetBalance
+      // },                  
+      {
+        key: 'explore',
+        content: 'View Explorer',
+        icon: <TbExternalLink />,
+        href: network.getAddressExplorer(wallet.account),
+        as: 'a',
+        target: '_blank'
+      },            
       {
         key: 'disconnect',
         content: 'Disconnect', 
         icon: <TbLogout />,      
         onClick: wallet.disconnect        
       },
-      ...actions
     ]
 
+    const action = (
+      <>
+        <HStack fontSize="xs">
+          <Text fontWeight="bold">{utils.shortAddr(wallet.account)}</Text>
+        </HStack>
+        <HStack fontSize="10px" spacing={1}>
+          <Text fontWeight="bold">{parseFloat(wallet.balance).toFixed(4)}</Text>
+          <Text color="gray.500">{wallet.network?.symbol}</Text>
+        </HStack>      
+      </>
+    )
+
     return (
-      <Dropdown items={defActions} btnProps={{ isLoading: loading }}>
-        {
-          children
-          ? children
-          : (
-            <>
-              <HStack fontSize="xs">
-                <Text>
-                  {utils.shortAddr(wallet.account)}
-                </Text>
-              </HStack>
-              <HStack fontSize="10px">
-                <Text>{parseFloat(wallet.balance).toFixed(4)}</Text>
-                <Text>{wallet.network?.symbol}</Text>
-              </HStack>            
-            </>
-          )
-        }
+      <Dropdown 
+        action={action}
+        items={!children && defActions}
+        btnProps={{ 
+          ...btnProps,
+          isLoading: loading, 
+          leftIcon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/metamask150.png`} /> }}>
+        {children}
       </Dropdown>
     )
   }
 
-  return <Dropdown items={defWallets}>Connect</Dropdown>
+  return <Dropdown 
+    items={defWallets} 
+    action="Connect"
+    btnProps={btnProps}
+    />
 }
