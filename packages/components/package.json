@@ -1,9 +1,13 @@
 {
   "name": "@xircus-web3/components",
-  "version": "1.0.1",
+  "version": "1.0.5",
+  "type": "module",
   "description": "Chakra UI Components with Xircus SDK",
   "main": "src/index.js",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --format=cjs --loader:.js=jsx --sourcemap --external:react --external:react-dom --external:@walletconnect/ethereum-provider --external:@xircus-web3/react --external:@xircus-web3/sdk --external:lodash --outfile=dist/index.js"
+  },
   "dependencies": {
     "@chakra-ui/react": "^2.5.2",
     "@emotion/react": "^11.10.6",
@@ -18,5 +22,8 @@
     "react-dropzone": "^14.2.3",
     "react-hotkeys-hook": "^4.3.8",
     "react-icons": "^4.8.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.14"
   }
 }

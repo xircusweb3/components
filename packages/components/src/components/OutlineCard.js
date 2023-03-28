@@ -1,4 +1,4 @@
-import { Box, useColorModeValue as mode } from '@chakra-ui/react'
+import { Box, Heading, Text, useColorModeValue as mode } from '@chakra-ui/react'
 
 export const OutlineCard = ({ title, label, children, color, theme, ...rest }) => {
   return (

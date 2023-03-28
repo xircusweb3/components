@@ -21,3 +21,8 @@ export * from './components/forms/Countdown'
 export * from './components/web3/MarketTopup'
 export * from './components/web3/MarketProfile'
 export * from './components/web3/Swapper'
+
+export * from './components/web3/TokenBalance'
+export * from './components/web3/TokenGate'
+
+export * from './components/service/getTokenBalance'

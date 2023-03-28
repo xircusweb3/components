@@ -1,6 +1,7 @@
 import { Avatar, Box, Button, Heading, useDisclosure, Text, Wrap, VStack, Center, Grid, HStack } from '@chakra-ui/react'
 import { useWallet } from '@xircus-web3/react'
 import { ICONS_URL } from '../constants/urls'
+import { CustomDrawer } from '../CustomDrawer'
 import { CustomModal } from '../CustomModal'
 
 export const ConnectModal = ({ children }) => {
@@ -49,7 +50,7 @@ export const ConnectModal = ({ children }) => {
     ? children 
     : (
         <>
-          <CustomModal header="Choose Your Wallet" isOpen={isOpen} onClose={onClose}>
+          <CustomModal header="Choose Your Wallet" onClose={onClose}>
             <Box>
               <Box mb={4}>
                 <Text>Choose how you want to connect. There are several wallet providers.</Text>
@@ -72,6 +73,9 @@ export const ConnectModal = ({ children }) => {
               <Text mb={4} fontSize="xs" color="gray.500">Start by connecting with one of the wallets above. This action will never access your seed phrase or private keys. Be sure to store your private keys or seed phrase securely. Never share them with anyone.</Text>
             </Box>
           </CustomModal>
+          <CustomDrawer isOpen={isOpen} onClose={onClose}>
+
+          </CustomDrawer>
           <Button onClick={onOpen}>Connect</Button>
         </>
       )

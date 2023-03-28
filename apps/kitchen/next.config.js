@@ -1,8 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  transpilePackages: ["components"],  
-}
+const withTM = require("next-transpile-modules")([
+  '@xircus-web3/components',
+])
 
-module.exports = nextConfig
+module.exports = withTM({
+  reactStrictMode: true,
+  swcMinify: false
+})
+
+// module.exports = {
+//   reactStrictMode: true,
+//   swcMinify: false,
+// }
