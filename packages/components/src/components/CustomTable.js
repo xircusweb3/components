@@ -3,7 +3,7 @@ import {
   useColorModeValue as mode,
 } from '@chakra-ui/react'
 
-export const DataTable = ({ fields = [], rows = [], isLoading, loaderRows = 4, loaderHeight = 24, hoverStyle, rowStyle, onRowClick, placeholder = 'No Data Yet', ...rest }) => (
+export const CustomTable = ({ fields = [], rows = [], isLoading, loaderRows = 4, loaderHeight = 24, hoverStyle, rowStyle, onRowClick, placeholder = 'No Data Yet', ...rest }) => (
   <TableContainer borderWidth={1} borderRadius="md" borderColor={mode('gray.100', 'gray.900')}>
     <Table variant="unstyled" {...rest}>
       <Thead>

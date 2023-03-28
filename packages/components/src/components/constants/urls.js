@@ -1,0 +1,1 @@
+export const ICONS_URL = 'https://raw.githubusercontent.com/xircusweb3/wallet-icons/master/wallets/'

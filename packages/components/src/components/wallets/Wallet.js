@@ -2,50 +2,16 @@ import { useState } from 'react'
 import { Avatar, HStack, Text, useClipboard, useToast } from '@chakra-ui/react'
 import { useWallet, useUtils, useNetwork } from '@xircus-web3/react'
 import { TbCheck, TbCopy, TbExternalLink, TbLogout, TbRefresh, TbSend, TbSignature } from 'react-icons/tb'
-import { Dropdown } from './Dropdown'
+import { Dropdown } from '../Dropdown'
+import { ICONS_URL } from '../constants/urls'
 
-const ICONS_URL = 'https://raw.githubusercontent.com/xircusweb3/wallet-icons/master/wallets/'
-
-export const ConnectWallet = ({ children, btnProps }) => {
+export const Wallet = ({ children, theme }) => {
   const network = useNetwork()
   const wallet = useWallet()
   const utils = useUtils()
   const toast = useToast()
   const { onCopy, hasCopied, value } = useClipboard(wallet.account || '')
   const [loading, setLoading] = useState(false)
-
-  const defWallets = [
-    { 
-      key: 'metamask',
-      icon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/metamask150.png`} />,
-      content: 'Metamask', 
-      onClick: wallet.connectMetamask
-    },
-    { 
-      key: 'walletconnect',
-      content: 'WalletConnect', 
-      icon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/walletconnect150.png`} />,      
-      onClick: wallet.connectWalletConnect
-    },
-    { 
-      key: 'coinbase',
-      content: 'Coinbase Wallet',
-      icon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/coinbase150.png`} />,      
-      onClick: wallet.connectCoinbase
-    },
-    { 
-      key: 'phantom',
-      content: 'Phantom',
-      icon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/phantom150.png`} />,      
-      onClick: wallet.connectPhantom
-    },        
-    { 
-      key: 'sender',
-      content: 'Sender',
-      icon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/sender150.png`} />,      
-      onClick: wallet.connectSender
-    }
-  ]
 
   const handleCopy = () => {
     onCopy()
@@ -98,7 +64,7 @@ export const ConnectWallet = ({ children, btnProps }) => {
         key: 'explore',
         content: 'View Explorer',
         icon: <TbExternalLink />,
-        href: network.getAddressExplorer(wallet.account),
+        href: network.getAddressExplorer(wallet.account) || '#',
         as: 'a',
         target: '_blank'
       },            
@@ -127,17 +93,13 @@ export const ConnectWallet = ({ children, btnProps }) => {
         action={action}
         items={!children && defActions}
         btnProps={{ 
-          ...btnProps,
+          ...theme?.button,
           isLoading: loading, 
-          leftIcon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/metamask150.png`} /> }}>
+          leftIcon: <Avatar size="xs" bg="transparent" src={`${ICONS_URL}/metamask150.png`} /> 
+        }}
+        {...theme?.dropdown}>
         {children}
       </Dropdown>
     )
   }
-
-  return <Dropdown 
-    items={defWallets} 
-    action="Connect"
-    btnProps={btnProps}
-    />
 }

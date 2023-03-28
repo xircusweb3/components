@@ -11,8 +11,12 @@
     "@walletconnect/ethereum-provider": "1.8.0",
     "@xircus-web3/react": "^1.0.90",
     "@xircus-web3/sdk": "^1.0.69",
+    "dayjs": "^1.11.7",
     "framer-motion": "^10.6.0",
     "lodash": "^4.17.21",
+    "react-countdown": "^2.3.5",
+    "react-dropzone": "^14.2.3",
+    "react-hotkeys-hook": "^4.3.8",
     "react-icons": "^4.8.0"
   }
 }
