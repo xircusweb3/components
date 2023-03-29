@@ -1,10 +1,18 @@
-import { Heading, Button } from "@chakra-ui/react";
+import { Heading, Button, Text } from "@chakra-ui/react";
 
 const gradient = `linear(to-l, #8a2387, #e94057, #f27121)`
 
 export const GradientHeading = props => 
   <Heading 
-    display="inline-block" 
+    display="inline-block"
+    bgGradient={gradient}
+    bgClip="text"
+    {...props}
+    />
+
+export const GradientText = props => 
+  <Text
+    display="inline-block"
     bgGradient={gradient}
     bgClip="text"
     {...props}

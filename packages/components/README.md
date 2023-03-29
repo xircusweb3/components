@@ -25,6 +25,14 @@ export default MyApp
 ```
 
 ### Components
+| Name            | Description             |
+|---              |---                      |
+|ConnectWallet    |
+|ConnectModal     |
+|Dropdown         |
+|Menu             |
+
+### Components
 - Connect Wallet
 - Xircus Registry Authentication with JWT Token and Referral Tracking
 - Data Tables

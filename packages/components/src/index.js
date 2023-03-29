@@ -10,8 +10,10 @@ export * from './components/wallets/NetworkInfo'
 export * from './components/wallets/ChangeNetwork'
 export * from './components/wallets/Wallet'
 
+export * from './components/Dropdown'
 export * from './components/Banner'
 export * from './components/CustomTable'
+export * from './components/Gradient' // Xircus Gradient Heading and Button
 export * from './components/GradientLoader'
 export * from './components/OutlineCard'
 
